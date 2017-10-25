@@ -58,5 +58,4 @@ async def help(message):
 
 
 # Run the bot
-#client.run("INSERT TOKEN HERE")
-client.run("MzcyNTI4NjYxMDIwMjc4Nzg3.DNFjfA.6pTgO9hw7XqGzVgNdRFdikPBlBQ")
+client.run("INSERT TOKEN HERE")
