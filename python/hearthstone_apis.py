@@ -27,7 +27,7 @@ class HearthstoneApis:
         # Get, parse, and print the information
         data = request.get(url).json()
 
-        output = ""
+        output = "Not Found"
 
         # Check its validity - "error" key is only in invalid data
         if "error" not in data:
