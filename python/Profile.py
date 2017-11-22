@@ -15,14 +15,18 @@ class Profile:
         self.times = [time]
         self.messages = [message]
 
+    #Print name of Profile for debugging
     def show(self):
         print(self.name);
 
+    #Update profile
     def update(self):
         print("updating")
 
+    #Check messages for the profile and determine if it is spam
     def __check_Messages(self):
         print("Checking messages")
 
+    #Check message times for the profile and determine if it is spam
     def __check_Times(self):
         print("Checking times")
