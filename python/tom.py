@@ -2,12 +2,19 @@ import discord
 import asyncio
 import python.wow_apis
 import python.hearthstone_apis
+import python.Spam_Controller
 
 # The bot client
 client = discord.Client()
 
+#World Of Warcraft API
 wow = python.wow_apis.WowApis()
+
+#HearthSrone API
 hs = python.hearthstone_apis.HearthstoneApis()
+
+#Spam Controller
+spam_cont = python.Spam_Controller.Spam_Controller()
 
 
 @client.event
@@ -24,7 +31,7 @@ async def on_ready():
     print("----------------------------------------")
 
     # Get the "bot_testing" chat channel id
-    id_file = open("../keys/channel_id", "r")
+    id_file = open("keys/channel_id", "r")
     channel_id = id_file.read().strip()
     id_file.close()
 
@@ -47,6 +54,9 @@ async def on_message(message):
 
     # Prevent the bot from responding to itself
     if message.author != client.user:
+
+        #Check if spam
+        await client.send_message(message.channel, spam_cont.check_spam(message.author.name))
 
         # If someone calls "/help"
         if message.content.startswith("/help"):
@@ -108,7 +118,7 @@ async def hearthstone_card(message):
 
 
 # Get the token and run the bot
-token_file = open("../keys/discord_token", "r")
+token_file = open("keys/discord_token", "r")
 discord_token = token_file.read().strip()
 token_file.close()
 
