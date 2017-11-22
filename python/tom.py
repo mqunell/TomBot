@@ -31,7 +31,7 @@ async def on_ready():
     print("----------------------------------------")
 
     # Get the "bot_testing" chat channel id
-    id_file = open("keys/channel_id", "r")
+    id_file = open("../keys/channel_id", "r")
     channel_id = id_file.read().strip()
     id_file.close()
 
@@ -118,7 +118,7 @@ async def hearthstone_card(message):
 
 
 # Get the token and run the bot
-token_file = open("keys/discord_token", "r")
+token_file = open("../keys/discord_token", "r")
 discord_token = token_file.read().strip()
 token_file.close()
 
