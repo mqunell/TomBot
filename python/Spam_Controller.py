@@ -13,9 +13,12 @@ class Spam_Controller:
 
         #Determine if the user is already a profile
         if name in self.__profiles:
-            return self.__profiles[name].update(time, message)
+            return self.__profiles[name].update(time, message,
+                                                self.__num_messages,
+                                                self.__time_posts,
+                                                self.__num_identical)
         else:
             self.__profiles[name] = python.Profile.Profile(name, time, message)
-            print("Added to Profiles")
+            print("User added to Profiles")
             self.__profiles[name].show()
             return False

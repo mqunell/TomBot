@@ -56,7 +56,7 @@ async def on_message(message):
     if message.author != client.user:
 
         #Check if spam
-        spam_cont.check_spam(message.author.name, 1, message.content)
+        await client.send_message(message.channel, spam_cont.check_spam(message.author.name, str(message.timestamp), message.content))
         #await client.send_message(message.channel, )
 
         # If someone calls "/help"
