@@ -1,17 +1,17 @@
 import discord
 import asyncio
-import python.wow_apis
-import python.hearthstone_apis
+from wow_apis import WowApis
+from hearthstone_apis import HearthstoneApis
 import python.Spam_Controller
 
 # The bot client
 client = discord.Client()
 
-#World Of Warcraft API
-wow = python.wow_apis.WowApis()
+# World Of Warcraft API
+wow = WowApis()
 
-#HearthSrone API
-hs = python.hearthstone_apis.HearthstoneApis()
+# Hearthstone API
+hs = HearthstoneApis()
 
 #Spam Controller
 spam_cont = python.Spam_Controller.Spam_Controller()
@@ -65,7 +65,15 @@ async def on_message(message):
 
         # If someone calls "/ilevel" or "/ilvl"
         if message.content.startswith("/ilevel") or message.content.startswith("/ilvl"):
-            await wow_ilevel(message)
+            await parse_wow(message, wow.item_level)
+
+        # If someone calls "/mplus"
+        if message.content.startswith("/mplus"):
+            await parse_wow(message, wow.mythic_plus)
+
+        # If someone calls "/wow"
+        if message.content.startswith("/wow"):
+            await parse_wow(message, wow.all)
 
         # If someone calls "/card" or "/hs"
         if message.content.startswith("/card") or message.content.startswith("/hs"):
@@ -82,10 +90,10 @@ async def help(message):
     await client.send_message(message.channel, msg)
 
 
-async def wow_ilevel(message):
+async def parse_wow(message, function):
     """
     Splits a message into ["/ilevel", <character>, <server>]
-    Calls website_apis.wow_item_level() for the API call and information
+    Calls the passed-in WowApis function and posts the results
     """
 
     command = message.content.split(" ")
@@ -94,7 +102,7 @@ async def wow_ilevel(message):
     if len(command) == 3:
 
         # Make the API call, which handles invalid input
-        await client.send_message(message.channel, wow.ilevel(command[1], command[2]))
+        await client.send_message(message.channel, function(command[1], command[2]))
 
     else:
         await client.send_message(message.channel, "Error: Invalid number of arguments")
@@ -103,6 +111,7 @@ async def wow_ilevel(message):
 async def hearthstone_card(message):
     """
     Splits a message into ["/card", <card>]
+    Calls HearthstoneApis.card() for the API call and results
     """
 
     command = message.content.split(" ")

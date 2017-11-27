@@ -27,16 +27,23 @@ class HearthstoneApis:
         # Get, parse, and print the information
         data = request.get(url).json()
 
-        output = "Not Found"
+        # Final output if data contains > 0 cards, but none of them have images to display
+        output = "%d card%s found, but no image%s to display" % (len(data),
+                                                                 "" if len(data) > 1 else "s",
+                                                                 "" if len(data) > 1 else "s")
 
         # Check its validity - "error" key is only in invalid data
         if "error" not in data:
 
             # Post the first image link
             for d in data:
-                if "img" in d and "collectible" in d:
-                    output = d["img"]
-                    break
+                if "img" in d:
+                    if "collectible" in d:
+                        output = d["img"]
+                        break
+
+                    else:
+                        output = "Did not find a collectible card, but found this (might not work):\n%s" % d["img"]
 
         else:
 
@@ -45,6 +52,6 @@ class HearthstoneApis:
                 output = "Card not found."
 
             else:
-                output = "Error code 2"
+                output = "Hearthstone API error. (non-404)"
 
         return output
