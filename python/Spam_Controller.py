@@ -1,4 +1,4 @@
-import python.Profile
+from Profile import Profile
 
 
 #Spam Controller class for the bot
@@ -38,7 +38,7 @@ class Spam_Controller:
                                                 self.__time_posts,
                                                 self.__num_identical)
         else:
-            self.__profiles[name] = python.Profile.Profile(name, time, message)
+            self.__profiles[name] = Profile(name, time, message)
 
             #Debugging code
             #print("User added to Profiles")

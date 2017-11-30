@@ -13,6 +13,9 @@ def time_until_wednesday():
 
     now = datetime.today()
 
+    # Testing - makes "now" a different day
+    # now = now.replace(month=11, day=23)
+
     # Days until Wednesday
     days_until = (WEDNESDAY - now.weekday()) % 7
 
@@ -44,8 +47,17 @@ def time_until_wednesday():
         # days_until = Days remaining in current month + days until Wednesday in next month
         days_until = (days_in_month - now.day) + (WEDNESDAY - first_day.weekday()) % 7
 
+        if updated_month != now.month:
+            days_until += 1
+
         # Updated wednesday
         wednesday = first_day.replace(day=(first_day.day + days_until - 1))
 
     num_seconds = (wednesday - now).total_seconds()
+
+    # Testing - prints the current day, next Wednesday, and number of days until Wednesday
+    print("Now: %s" % str(now))
+    print("Wednesday: %s" % str(wednesday))
+    print("Approx. days until Wednesday: %f" % (num_seconds / 60.0 / 60.0 / 24.0))
+
     return num_seconds

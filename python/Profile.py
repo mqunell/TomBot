@@ -1,6 +1,3 @@
-import re
-
-
 #Profile class, reprensents a profile in discord.
 #Parameters:
 #name is a String for the user name

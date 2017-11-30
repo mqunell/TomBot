@@ -1,21 +1,21 @@
 import discord
 import asyncio
 import wednesday
+from Spam_Controller import Spam_Controller
 from wow_apis import WowApis
 from hearthstone_apis import HearthstoneApis
-import python.Spam_Controller
 
 # The bot client
 client = discord.Client()
 
-# World Of Warcraft API
+# World of Warcraft API
 wow = WowApis()
 
 # Hearthstone API
 hs = HearthstoneApis()
 
-#Spam Controller
-spam_cont = python.Spam_Controller.Spam_Controller(5, 10, 2)
+# Spam Controller
+spam_cont = Spam_Controller(5, 10, 2)
 
 
 @client.event
@@ -43,7 +43,7 @@ async def on_ready():
     # Set the bot's "Playing" status
     await client.change_presence(game=discord.Game(name="Type /help"))
 
-    # Start the Wednesday timer
+    # Start the Wednesday "timer"
     time = wednesday.time_until_wednesday()
     await asyncio.sleep(time)
     await post_wednesday()
@@ -61,9 +61,9 @@ async def on_message(message):
     # Prevent the bot from responding to itself
     if message.author != client.user:
 
-        #Check if spam
-        isSpam =  spam_cont.check_spam(message.author.name, str(message.timestamp), message.content)
-        if isSpam:
+        # Check if spam
+        is_spam = spam_cont.check_spam(message.author.name, str(message.timestamp), message.content)
+        if is_spam:
             await client.delete_message(message)
 
         # If someone calls "/help"
@@ -101,7 +101,7 @@ async def post_wednesday():
     await client.send_message(client.get_channel("369349307897217024"),
                               "http://i1.kym-cdn.com/photos/images/newsfeed/001/091/264/665.jpg")
 
-    # Start the new Wednesday timer
+    # Start the new Wednesday "timer"
     time = 7 * 24 * 60 * 60
     await asyncio.sleep(time)
     await post_wednesday()
