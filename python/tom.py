@@ -1,17 +1,18 @@
 import discord
 import asyncio
-import python.wow_apis
-import python.hearthstone_apis
+import wednesday
+from wow_apis import WowApis
+from hearthstone_apis import HearthstoneApis
 import python.Spam_Controller
 
 # The bot client
 client = discord.Client()
 
-#World Of Warcraft API
-wow = python.wow_apis.WowApis()
+# World Of Warcraft API
+wow = WowApis()
 
-#HearthSrone API
-hs = python.hearthstone_apis.HearthstoneApis()
+# Hearthstone API
+hs = HearthstoneApis()
 
 #Spam Controller
 spam_cont = python.Spam_Controller.Spam_Controller(5, 10, 2)
@@ -42,6 +43,11 @@ async def on_ready():
     # Set the bot's "Playing" status
     await client.change_presence(game=discord.Game(name="Type /help"))
 
+    # Start the Wednesday timer
+    time = wednesday.time_until_wednesday()
+    await asyncio.sleep(time)
+    await post_wednesday()
+
 
 @client.event
 async def on_message(message):
@@ -55,10 +61,16 @@ async def on_message(message):
     # Prevent the bot from responding to itself
     if message.author != client.user:
 
+<<<<<<< HEAD
         #Check if spam
         isSpam =  spam_cont.check_spam(message.author.name, str(message.timestamp), message.content)
         if isSpam:
             await client.delete_message(message)
+=======
+        # Check if spam
+        await client.send_message(message.channel, spam_cont.check_spam(message.author.name, str(message.timestamp),
+                                                                        message.content))
+>>>>>>> refs/remotes/origin/master
 
         # If someone calls "/help"
         if message.content.startswith("/help"):
@@ -66,7 +78,15 @@ async def on_message(message):
 
         # If someone calls "/ilevel" or "/ilvl"
         if message.content.startswith("/ilevel") or message.content.startswith("/ilvl"):
-            await wow_ilevel(message)
+            await parse_wow(message, wow.item_level)
+
+        # If someone calls "/mplus"
+        if message.content.startswith("/mplus"):
+            await parse_wow(message, wow.mythic_plus)
+
+        # If someone calls "/wow"
+        if message.content.startswith("/wow"):
+            await parse_wow(message, wow.all)
 
         # If someone calls "/card" or "/hs"
         if message.content.startswith("/card") or message.content.startswith("/hs"):
@@ -83,10 +103,20 @@ async def help(message):
     await client.send_message(message.channel, msg)
 
 
-async def wow_ilevel(message):
+async def post_wednesday():
+    await client.send_message(client.get_channel("369349307897217024"),
+                              "http://i1.kym-cdn.com/photos/images/newsfeed/001/091/264/665.jpg")
+
+    # Start the new Wednesday timer
+    time = 7 * 24 * 60 * 60
+    await asyncio.sleep(time)
+    await post_wednesday()
+
+
+async def parse_wow(message, function):
     """
     Splits a message into ["/ilevel", <character>, <server>]
-    Calls website_apis.wow_item_level() for the API call and information
+    Calls the passed-in WowApis function and posts the results
     """
 
     command = message.content.split(" ")
@@ -95,7 +125,7 @@ async def wow_ilevel(message):
     if len(command) == 3:
 
         # Make the API call, which handles invalid input
-        await client.send_message(message.channel, wow.ilevel(command[1], command[2]))
+        await client.send_message(message.channel, function(command[1], command[2]))
 
     else:
         await client.send_message(message.channel, "Error: Invalid number of arguments")
@@ -104,6 +134,7 @@ async def wow_ilevel(message):
 async def hearthstone_card(message):
     """
     Splits a message into ["/card", <card>]
+    Calls HearthstoneApis.card() for the API call and results
     """
 
     command = message.content.split(" ")
