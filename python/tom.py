@@ -1,7 +1,6 @@
 import discord
 import asyncio
-from datetime import datetime, date
-from threading import Timer
+import wednesday
 from wow_apis import WowApis
 from hearthstone_apis import HearthstoneApis
 import python.Spam_Controller
@@ -45,8 +44,9 @@ async def on_ready():
     await client.change_presence(game=discord.Game(name="Type /help"))
 
     # Start the Wednesday timer
-    time = time_until_wednesday()
-    Timer(time, post_wednesday()).start()
+    time = wednesday.time_until_wednesday()
+    await asyncio.sleep(time)
+    await post_wednesday()
 
 
 @client.event
@@ -61,9 +61,9 @@ async def on_message(message):
     # Prevent the bot from responding to itself
     if message.author != client.user:
 
-        #Check if spam
-        await client.send_message(message.channel, spam_cont.check_spam(message.author.name, str(message.timestamp), message.content))
-        #await client.send_message(message.channel, )
+        # Check if spam
+        await client.send_message(message.channel, spam_cont.check_spam(message.author.name, str(message.timestamp),
+                                                                        message.content))
 
         # If someone calls "/help"
         if message.content.startswith("/help"):
@@ -96,53 +96,14 @@ async def help(message):
     await client.send_message(message.channel, msg)
 
 
-def time_until_wednesday():
-    now = datetime.today()
-
-    days_until = -1
-    wednesday = now
-
-    try:
-        # Days until Wednesday (Wed == 2)
-        days_until = (2 - now.weekday()) % 7
-
-        # Update wednesday
-        wednesday = now.replace(day=now.day + days_until, hour=0, minute=0, second=0, microsecond=0)
-
-    except:
-        # Update day, month, and year if necessary
-        updated_month = now.month + 1
-        updated_year = now.year
-
-        if updated_month == 13:
-            updated_month = 1
-            updated_year = now.year + 1
-
-        # Get the days in the current month
-        days_in_month = (date(updated_year, updated_month, 1) - date(now.year, now.month, 1)).days
-
-        # The first day of next month
-        first_day = now.replace(year=updated_year, month=updated_month, day=1, hour=0, minute=0, second=0,
-                                microsecond=0)
-
-        # days_until = Days remaining in current month + days until Wednesday in next month
-        days_until = (days_in_month - now.day) + (2 - first_day.weekday()) % 7
-
-        # Updated wednesday
-        wednesday = first_day.replace(day=(first_day.day + days_until - 1))
-
-    print("%d seconds" % (wednesday - now).seconds)
-    return (wednesday - now).seconds
-
-
 async def post_wednesday():
-    await client.send_message(client.get_channel("373164195283337218"),
+    await client.send_message(client.get_channel("369349307897217024"),
                               "http://i1.kym-cdn.com/photos/images/newsfeed/001/091/264/665.jpg")
 
-    # Start the Wednesday timer
+    # Start the new Wednesday timer
     time = 7 * 24 * 60 * 60
-    Timer(time, post_wednesday()).start()
-
+    await asyncio.sleep(time)
+    await post_wednesday()
 
 
 async def parse_wow(message, function):
