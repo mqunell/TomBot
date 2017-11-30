@@ -1,11 +1,11 @@
 import re
 
 
-# Profile class, reprensents a profile in discord.
-# Parameters:
-# name is a String for the user name
-# messages is a list of length 5 that contains Strings
-# times is a list of length 5 that contains floats
+#Profile class, reprensents a profile in discord.
+#Parameters:
+#name is a String for the user name
+#messages is a list of length 5 that contains Strings
+#times is a list of length 5 that contains floats
 class Profile:
     __name = "None"
     __messages = [5]
@@ -114,6 +114,11 @@ class Profile:
                 if (num_of_checks == num_posts):
                     check = True
                     break
+
+        #remove message so they can keep posting after ban
+        if check:
+            del self.__messages[-1]
+
         return check
 
     # Splices the time given so that the reutrned String is only the seconds left in that minute

@@ -14,7 +14,7 @@ wow = python.wow_apis.WowApis()
 hs = python.hearthstone_apis.HearthstoneApis()
 
 #Spam Controller
-spam_cont = python.Spam_Controller.Spam_Controller()
+spam_cont = python.Spam_Controller.Spam_Controller(5, 10, 2)
 
 
 @client.event
@@ -56,8 +56,9 @@ async def on_message(message):
     if message.author != client.user:
 
         #Check if spam
-        await client.send_message(message.channel, spam_cont.check_spam(message.author.name, str(message.timestamp), message.content))
-        #await client.send_message(message.channel, )
+        isSpam =  spam_cont.check_spam(message.author.name, str(message.timestamp), message.content)
+        if isSpam:
+            await client.delete_message(message)
 
         # If someone calls "/help"
         if message.content.startswith("/help"):
