@@ -22,11 +22,11 @@ To add Tom to your server:
 Tom should be on your server after a few seconds. Whenever Tom is online...
 
 * Type "/help" to view available commands.
-* For World of Warcraft players, you can type:
-  * "/ilevel <character> <server>" to display a player's basic info and item level.
-  * "/mplus <character> <server>" to display a player's Mythic Plus statistics.
-  * "/wow <character> <server>" to display both of that.       
-* For Hearthstone players, type "/card <cardname>" to display a collectible card. 
+* For World of Warcraft players, you can type (replacing character and server with theirs):
+  * "/ilevel character server" to display a player's basic info and item level.
+  * "/mplus character server" to display a player's Mythic Plus statistics.
+  * "/wow character server" to display both of that.       
+* For Hearthstone players, type (replacing cardname with... a card name) "/card cardname" to display a collectible card. 
 * He keeps tabs on the users of the server, preventing them from spamming. To stay unmuted, make sure to avoid:
   * Posting the exact same message twice in a row.
   * Posting 5 messages within 10 seconds.
