@@ -15,7 +15,7 @@ wow = WowApis()
 hs = HearthstoneApis()
 
 #Spam Controller
-spam_cont = python.Spam_Controller.Spam_Controller()
+spam_cont = python.Spam_Controller.Spam_Controller(5, 10, 2)
 
 
 @client.event
@@ -61,9 +61,16 @@ async def on_message(message):
     # Prevent the bot from responding to itself
     if message.author != client.user:
 
+<<<<<<< HEAD
+        #Check if spam
+        isSpam =  spam_cont.check_spam(message.author.name, str(message.timestamp), message.content)
+        if isSpam:
+            await client.delete_message(message)
+=======
         # Check if spam
         await client.send_message(message.channel, spam_cont.check_spam(message.author.name, str(message.timestamp),
                                                                         message.content))
+>>>>>>> refs/remotes/origin/master
 
         # If someone calls "/help"
         if message.content.startswith("/help"):
