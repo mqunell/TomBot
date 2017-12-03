@@ -1,6 +1,7 @@
 import discord
 import asyncio
-import wednesday
+import weekday_timers
+from weekday import Weekday
 from Spam_Controller import Spam_Controller
 from wow_apis import WowApis
 from hearthstone_apis import HearthstoneApis
@@ -44,7 +45,7 @@ async def on_ready():
     await client.change_presence(game=discord.Game(name="Type /help"))
 
     # Start the Wednesday "timer"
-    time = wednesday.time_until_wednesday()
+    time = weekday_timers.time_until(Weekday.WEDNESDAY)
     await asyncio.sleep(time)
     await post_wednesday()
 
@@ -69,6 +70,12 @@ async def on_message(message):
         # If someone calls "/help"
         if message.content.startswith("/help"):
             await help(message)
+
+        # DEMO COMMAND - If someone calls "/wednesday"
+        if message.content.startswith("/wednesday"):
+            await client.send_message(message.channel,
+                                      "Approximately %f days until Wednesday" %
+                                      (weekday_timers.time_until(Weekday.WEDNESDAY) / 60.0 / 60.0 / 24.0))
 
         # If someone calls "/ilevel" or "/ilvl"
         if message.content.startswith("/ilevel") or message.content.startswith("/ilvl"):
