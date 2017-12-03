@@ -8,11 +8,11 @@ def time_until(input_weekday):
     attempting to set a date that is outside of the month's range (ex. November 36th).
     """
 
-    # The current daytime
+    # The current datetime
     now = datetime.today()
 
     # Testing - makes "now" a different day
-    #now = now.replace(month=11, day=23)
+    now = now.replace(month=12, day=5)
 
     # Get the value of the target weekday
     target_weekday_num = input_weekday.value
@@ -20,12 +20,12 @@ def time_until(input_weekday):
     # Days until target
     days_until = (target_weekday_num - now.weekday()) % 7
 
-    # If today is w, look at next week's w
+    # If today is input_weekday, look at next week's input_weekday
     if days_until == 0:
         days_until = 7
 
     try:
-        # Update just the day
+        # Leave month/year alone; update day; set hour/minute/second/microsecond to 0
         target_weekday = now.replace(day=now.day + days_until, hour=0, minute=0, second=0, microsecond=0)
 
     except:
@@ -40,22 +40,17 @@ def time_until(input_weekday):
         # Get the days in the current month
         days_in_month = (date(updated_year, updated_month, 1) - date(now.year, now.month, 1)).days
 
-        # The first day of next month
-        first_day = now.replace(year=updated_year, month=updated_month, day=1, hour=0, minute=0, second=0,
-                                microsecond=0)
+        # The date of the next input_weekday
+        target_date = days_until - (days_in_month - now.day)
 
-        # days_until = Days remaining in current month + days until w in next month
-        days_until = (days_in_month - now.day) + (target_weekday_num - first_day.weekday()) % 7
+        # Target weekday
+        target_weekday = datetime(year=updated_year, month=updated_month, day=target_date, hour=0, minute=0, second=0,
+                                  microsecond=0)
 
-        if updated_month != now.month:
-            days_until += 1
-
-        # Updated target
-        target_weekday = first_day.replace(day=(first_day.day + days_until - 1))
-
+    # Seconds between now and target_weekday
     num_seconds = (target_weekday - now).total_seconds()
 
-    # Test output - prints the current day, next target, and number of days until Wednesday
+    # Test output - prints the current day, next input_weekday, and number of days until then
     print("Now: %s" % str(now))
     weekday_strings = {0: "Mon", 1: "Tues", 2: "Wed", 3: "Thurs", 4: "Fri", 5: "Sat", 6: "Sun"}
     print("%s: %s" % (weekday_strings[target_weekday_num], str(target_weekday)))
