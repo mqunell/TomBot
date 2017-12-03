@@ -21,7 +21,7 @@ To add Tom to your server:
   
 Tom should be on your server after a few seconds. Whenever Tom is online...
 
-* Type "/help" to view available commands.
+* Type "/help" to view all available commands.
 * For World of Warcraft players, you can type (replacing character and server with theirs):
   * "/ilevel character server" to display a player's basic info and item level.
   * "/mplus character server" to display a player's Mythic Plus statistics.
@@ -30,7 +30,8 @@ Tom should be on your server after a few seconds. Whenever Tom is online...
 * He keeps tabs on the users of the server, preventing them from spamming. To stay unmuted, make sure to avoid:
   * Posting the exact same message twice in a row.
   * Posting 5 messages within 10 seconds.
-* The server admin will have to manually unmute muted users (A server "role" will be assigned and unassigned).
-* Expect a special message from Tom every Wednesday at 12:00 AM.
+* The server admin will have to manually unmute muted users (A server "role" will be assigned and unassigned). Maybe.
+* After 4 messages, Tom will delete the 5th message and every message afterwards.
+* Expect a special message from Tom every Wednesday at 12:00 AM. Type "/wednesday" to see the days remaining until then.
 
 Enjoy Tom's company.
