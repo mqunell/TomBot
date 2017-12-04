@@ -117,6 +117,10 @@ async def help(message):
 
 
 async def post_wednesday():
+    """
+    Posts the "It is Wednesday, my dudes" link, and starts a pseudo-timer for the next Wednesday
+    """
+
     await client.send_message(client.get_channel("369349307897217024"),
                               "http://i1.kym-cdn.com/photos/images/newsfeed/001/091/264/665.jpg")
 
@@ -129,7 +133,7 @@ async def post_wednesday():
 async def parse_wow(message, function):
     """
     Splits a message into ["/ilevel", <character>, <server>]
-    Calls the passed-in WowApis function and posts the results
+    Calls the passed-in WowApis function for the API call(s) and posts the results
     """
 
     command = message.content.split(" ")
@@ -147,7 +151,7 @@ async def parse_wow(message, function):
 async def hearthstone_card(message):
     """
     Splits a message into ["/card", <card>]
-    Calls HearthstoneApis.card() for the API call and results
+    Calls HearthstoneApis.card() for the API call and posts the results
     """
 
     command = message.content.split(" ")

@@ -2,7 +2,8 @@ from datetime import datetime, date
 
 
 def time_until(input_weekday):
-    """
+    """ Return seconds as integer
+
     Calculates and returns the time until the next target weekday, in seconds
     The try/except statement handles setting the target variable to the next target weekday. An exception is raised when
     attempting to set a date that is outside of the month's range (ex. November 36th).
