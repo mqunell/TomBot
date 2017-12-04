@@ -99,7 +99,19 @@ async def help(message):
     Writes what the bot can do
     """
 
-    msg = "I don't have any functionality yet; just a friendly face."
+    msg = ("Alright, I'll help you. ( ͡° ͜ʖ ͡°) \n"
+           "Here are the commands for the only things I am capable of doing in life. \n\n"
+           "Item Level and stuff: \n"
+           "/ilevel <character> <server> \n"
+           "or you can replace 'ilevel' with 'ilvl' \n\n"
+           "Mythic Plus and stuff: \n"
+           "/mplus <character> <server> \n\n"
+           "If you want both of that stuff: \n"
+           "/wow <character> <server> \n\n"
+           "Hearthstone cards: \n"
+           "/card <cardname> \n"
+           "or you can replace 'card' with 'hs' \n\n"
+           "Also, please do not spam the chat. I usually can tolerate people, but there is a line. Don't cross it.")
 
     await client.send_message(message.channel, msg)
 
