@@ -73,9 +73,9 @@ async def on_message(message):
 
         # DEMO COMMAND - If someone calls "/wednesday"
         if message.content.startswith("/wednesday"):
-            await client.send_message(message.channel,
-                                      "Approximately %f days until Wednesday" %
-                                      (weekday_timers.time_until(Weekday.WEDNESDAY) / 60.0 / 60.0 / 24.0))
+            await client.send_message(message.channel, "Approximately %f days until %s" %
+                                      ((weekday_timers.time_until(Weekday.WEDNESDAY) / 60.0 / 60.0 / 24.0),
+                                       "http://i1.kym-cdn.com/photos/images/newsfeed/001/091/264/665.jpg"))
 
         # If someone calls "/ilevel" or "/ilvl"
         if message.content.startswith("/ilevel") or message.content.startswith("/ilvl"):
