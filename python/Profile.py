@@ -4,19 +4,21 @@
 #messages is a list of length 5 that contains Strings
 #times is a list of length 5 that contains floats
 class Profile:
-    __name = "None"
-    __messages = [5]
-    __times = [5]
+    #__name = "None"
+    #__messages = [5]
+    #__times = [5]
 
     # Constructor
     def __init__(self, name, time, message):
         self.__name = name
+        self.__times = [5]
         self.__times[0] = self.__splice_time(time)
-        self.__messages[0] = message
+        self.__messages = [5]
+        self.__messages[0] =message
 
     # Print name of Profile for debugging
     def show(self):
-        print("Show Name: " + self.__name);
+        print("Show Name: " + self.__name)
 
     # Update profile
     def update(self, time, message, num_messages, time_posts, num_identical):
