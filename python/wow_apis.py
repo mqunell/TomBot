@@ -1,6 +1,7 @@
 import requests
 
 
+# Encapsulates World of Warcraft APIs
 class WowApis:
 
     api_key = ""
@@ -29,7 +30,8 @@ class WowApis:
 
     # Average item level
     def item_level(self, character, server):
-        """
+        """ Return formatted item level string
+
         Accesses the Battle.net API to get a character's level, race, class, and average item level
         """
 
@@ -79,7 +81,8 @@ class WowApis:
 
     # Mythic Plus info
     def mythic_plus(self, character, server):
-        """
+        """ Return formatted Mythic Plus string
+
         Accesses the Raider.IO API to get a character's overall Mythic Plus score, highest completed Mythic Plus dungeon
         in the last week, and a link to their Raider.IO profile
         """
@@ -127,7 +130,8 @@ class WowApis:
 
     # All WoW API info
     def all(self, character, server):
-        """
+        """ Return formatted item level and Mythic Plus string
+
         Gathers information from both other WowApis functions
         """
 
