@@ -13,7 +13,7 @@ def time_until(input_weekday):
     now = datetime.today()
 
     # Testing - makes "now" a different day
-    now = now.replace(month=12, day=5)
+    #now = now.replace(month=12, day=5)
 
     # Get the value of the target weekday
     target_weekday_num = input_weekday.value
