@@ -65,6 +65,7 @@ async def on_message(message):
         # Check if spam
         is_spam = spam_cont.check_spam(message.author.name, str(message.timestamp), message.content)
         if is_spam:
+            print("Banned")
             await client.delete_message(message)
 
         # If someone calls "/help"

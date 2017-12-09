@@ -3,40 +3,41 @@
 #name is a String for the user name
 #messages is a list of length 5 that contains Strings
 #times is a list of length 5 that contains floats
+#num_messages: This is the number of messages allowed within the given seconds. 
 class Profile:
-    #__name = "None"
-    #__messages = [5]
-    #__times = [5]
 
     # Constructor
-    def __init__(self, name, time, message):
+    def __init__(self, name, time, message, num_messages):
         self.__name = name
-        self.__times = [5]
+        self.__times = [num_messages]
         self.__times[0] = self.__splice_time(time)
-        self.__messages = [5]
+        self.__messages = [num_messages]
         self.__messages[0] =message
 
-    # Print name of Profile for debugging
+    # Print name of Profile
     def show(self):
         print("Show Name: " + self.__name)
 
     # Update profile
     def update(self, time, message, num_messages, time_posts, num_identical):
 
-        # Check the size of messages or times, only append if size list than 5
-        if (len(self.__messages) >= 5):
+        # Check the size of messages only append if size list than 5
+        while(len(self.__messages) > num_messages - 1):
             self.__messages.pop(0)
+
+        # Check the size of times only append if size is list than
+        while(len(self.__times) > num_messages - 1):
             self.__times.pop(0)
 
         self.__messages.append(message)
         self.__times.append(self.__splice_time(time))
 
         #For debugging
-        #j = 0
-        #print("------------")
-        #for i in self.__times:
-            #print(str(j) + ". " + str(i))
-            #j += 1
+        j = 0
+        print("------" + self.__name + "------")
+        for i in self.__times:
+            print(str(j) + ". " + str(i))
+            j += 1
 
         # Check for messages and times here
         # print("Identical Posts " + str(self.__check_Identical()))
