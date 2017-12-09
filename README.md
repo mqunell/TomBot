@@ -18,8 +18,9 @@ To add Tom to your server:
   4.  Go to https://discordapp.com/oauth2/authorize?client_id=372528661020278787&scope=bot
   5.  If it tells you to log in, do so. It will prompt you to select one of your servers where you want Tom added.
   6.  You should now see Tom's friendly face. Click the drop down menu and select the server you want him added.
+  7.  Tom should be on your server after a few seconds. The server owner will need to give him the "Manage Messages" permission     in order for spam prevention to work properly.
   
-Tom should be on your server after a few seconds. Whenever Tom is online...
+Whenever Tom is online...
 
 * Type "/help" to view all available commands.
 * For World of Warcraft players, you can type (replacing character and server with theirs):
