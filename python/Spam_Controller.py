@@ -38,7 +38,7 @@ class Spam_Controller:
                                                 self.__time_posts,
                                                 self.__num_identical)
         else:
-            self.__profiles[name] = Profile(name, time, message)
+            self.__profiles[name] = Profile(name, time, message, self.__num_messages)
 
             #Debugging code
             #print("User added to Profiles")
